@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection = Util.getConnection();
+
     public UserDaoJDBCImpl() {}
 
     @Override
@@ -53,7 +53,8 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM `user`";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet resultSet = ps.executeQuery()) {
 
             int counter = 0;
@@ -80,7 +81,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     private void execute(String sql, String message) {
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = Util.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.execute();
             System.out.println(message);
         } catch (SQLException e) {
