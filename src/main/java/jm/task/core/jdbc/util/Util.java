@@ -1,6 +1,7 @@
 package jm.task.core.jdbc.util;
 
 import jm.task.core.jdbc.model.User;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -20,32 +21,31 @@ public class Util {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println(String.format("подключено к %s", connection.getCatalog()));
+            System.out.printf("подключено к %s%n", connection.getCatalog());
         } catch (SQLException e) {
             System.out.println("нет соединения");
             System.out.println(e.getMessage());
         }
-
         return connection;
     }
 
 
     public static SessionFactory getFactory() {
-
-        Configuration config = new Configuration()
-                .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/pre_project")
-                .setProperty("hibernate.connection.driver.class", "com.mysql.jdbc.Driver")
-                .setProperty("hibernate.connection.username", "root")
-                .setProperty("hibernate.connection.password", "Pre-project.1.1.4")
-                .setProperty("hibernate.current_session_context_class", "thread")
-                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
-                .setProperty("show_sql", "true");
-
-
-        SessionFactory sessionFactory = config
-                .addAnnotatedClass(User.class)
-                .buildSessionFactory();
-
+        SessionFactory sessionFactory = null;
+        try {
+            sessionFactory = new Configuration()
+                    .setProperty("hibernate.connection.url", DB_URL)
+                    .setProperty("hibernate.connection.driver.class", "com.mysql.jdbc.Driver")
+                    .setProperty("hibernate.connection.username", USER)
+                    .setProperty("hibernate.connection.password", PASS)
+                    .setProperty("hibernate.current_session_context_class", "thread")
+                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .setProperty("show_sql", "true")
+                    .addAnnotatedClass(User.class)
+                    .buildSessionFactory();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());;
+        }
         return sessionFactory;
     }
 

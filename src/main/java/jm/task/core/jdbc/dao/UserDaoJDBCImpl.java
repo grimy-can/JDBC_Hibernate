@@ -76,8 +76,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
-    String sql = "TRUNCATE TABLE `pre_project`.`user`";
-    execute(sql, "очищена таблица user");
+        String sql = "TRUNCATE TABLE `pre_project`.`user`";
+        execute(sql, "очищена таблица user");
     }
 
     private void execute(String sql, String message) {
