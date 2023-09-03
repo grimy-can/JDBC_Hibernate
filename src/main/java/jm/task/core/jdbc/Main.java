@@ -26,5 +26,6 @@ public class Main {
         dao.cleanUsersTable();
 
         dao.dropUsersTable();
+
     }
 }
