@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@Table
+@Table(name = "pre_project")
 public class User {
 
     @Id
