@@ -9,7 +9,7 @@ public class Util {
 
     private final static String DB_URL = "jdbc:mysql://localhost:3306/pre_project";
     private final static String USER = "root";
-    private final static String PASS = "JavaPre-project.1.1.4";
+    private final static String PASS = "root";
 
     public static Connection getConnection()  {
         Connection connection = null;
