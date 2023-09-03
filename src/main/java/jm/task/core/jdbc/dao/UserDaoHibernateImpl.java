@@ -27,8 +27,6 @@ public class UserDaoHibernateImpl implements UserDao {
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;""";
 
         execute(sql, "создана таблица user");
-
-
     }
 
     @Override
