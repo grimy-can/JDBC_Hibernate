@@ -1,11 +1,13 @@
 package jm.task.core.jdbc.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@Table
+@Entity
+@Table(name = "pre_project")
 public class User {
 
     @Id
